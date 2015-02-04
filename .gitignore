@@ -1,1 +1,13 @@
 *.png
+*.aux
+*.dvi
+*.ps
+*.bbl
+*.blg
+*.out
+*.log
+*.toc
+*.nav
+*.snm
+*.bak
+*.pdf
