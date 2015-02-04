@@ -1,0 +1,43 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
+
+\begin{document}
+\begin{tikzpicture} % plotting with data in columns
+  \begin{axis}
+    \addplot table [x=a, y=b, col sep=comma] {data.csv}; % addplot table reads table from file
+    \addplot table [x=a, y=c, col sep=comma] {data.csv};
+    \addplot table [x=a, y=d, col sep=comma] {data.csv};
+  \end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+  \begin{axis}[ybar,bar width=2pt]
+    \addplot table[x=rounds, y=RRS] {table.dat};
+    \addplot table[x=rounds, y=QRC] {table.dat};
+  \end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+  \begin{loglogaxis}[
+      xlabel=Cost,
+      ylabel=Error
+    ]
+    \addplot[color=red,mark=x] coordinates {
+      (5,    8.31160034e-02)
+      (17,   2.54685628e-02)
+      (49,   7.40715288e-03)
+      (129,  2.10192154e-03)
+      (321,  5.87352989e-04)
+      (769,  1.62269942e-04)
+      (1793, 4.44248889e-05)
+      (4097, 1.20714122e-05)
+      (9217, 3.26101452e-06)
+    };
+    \addplot[color=blue,mark=*]
+    table[x=Cost,y=Error] {costerror.dat};
+
+    \legend{Case 1,Case 2}
+  \end{loglogaxis}
+  \end{tikzpicture}
+\end{document}

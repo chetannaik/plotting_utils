@@ -1,8 +1,22 @@
 \documentclass{article}
 \usepackage{pgfplots}
+\pgfplotsset{compat=1.8}
 
 
 \begin{document}
+\begin{tikzpicture}
+  \begin{axis}[
+      legend entries={$x$,$x^2$},
+      legend style={
+        at={(1.03,0.5)},
+        anchor=west
+      }
+    ]
+    \addplot {x};
+    \addplot {x^2};
+  \end{axis}
+  \end{tikzpicture}
+
 \setlength{\fboxsep}{0pt}
 \fbox{
   \begin{tikzpicture}

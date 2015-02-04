@@ -1,5 +1,7 @@
 \documentclass{article}
 \usepackage{pgfplots}
+\usepackage[left=2.5cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\pgfplotsset{compat=1.8}
 \usetikzlibrary{patterns}
 
 \begin{document}
@@ -46,4 +48,111 @@
     \legend{Far,Near,Here,Annot}
   \end{axis}
 \end{tikzpicture}
+
+% Define bar chart colors
+%
+\definecolor{bblue}{HTML}{4F81BD}
+\definecolor{rred}{HTML}{C0504D}
+\definecolor{ggreen}{HTML}{9BBB59}
+\definecolor{ppurple}{HTML}{9F4C7C}
+
+
+\begin{tikzpicture}
+  \begin{axis}[
+      width  = 0.85*\textwidth,
+      height = 8cm,
+      major x tick style = transparent,
+      ybar=2*\pgflinewidth,
+      bar width=14pt,
+      ymajorgrids = true,
+      ylabel = {Run time speed},
+      symbolic x coords={EgyptHD,Hover,Navi},
+      xtick = data,
+      scaled y ticks = false,
+      enlarge x limits=0.25,
+      ymin=0,
+      legend cell align=left,
+      legend style={
+        at={(1,1.05)},
+        anchor=south east,
+        column sep=1ex
+      }
+    ]
+    \addplot[style={bblue,fill=bblue,mark=none}]
+    coordinates {(EgyptHD, 1.0) (Hover,1.0) (Navi,1.0)};
+
+    \addplot[style={rred,fill=rred,mark=none}]
+    coordinates {(EgyptHD,1.123) (Hover,0.85) (Navi,1.09)};
+
+    \addplot[style={ggreen,fill=ggreen,mark=none}]
+    coordinates {(EgyptHD,0.92) (Hover,0.56) (Navi,0.95)};
+
+    \addplot[style={ppurple,fill=ppurple,mark=none}]
+    coordinates {(EgyptHD,0.74) (Hover,1.07) (Navi,1.23)};
+    \legend{No vectorization,TreeScore $>2$,TreeScore $>3$,TreeScore $>4$}
+  \end{axis}
+\end{tikzpicture}
+
+
+\pgfplotstableread{
+  3 38.9575
+  4 166.897
+  6 53.63835
+  7 39.6594
+  8 82.1631
+  9 40.22045
+  10 37.2932
+  11 131.62625
+  12 472.6995
+  13 149.837
+  14 113.445
+  15 108.474
+  16 155.24455
+  17 95.41392
+  18 186.819
+  19 153.383
+  20 313.361
+  21 180.1305
+  22 401.3485
+  23 1621.092
+  24 1929.3
+  25 899.283
+  26 726.926
+  27 1624.4
+  28 870.348
+  29 979.472
+  30 869.418
+  31 274.83
+  32 1945.87
+  33 1359.09
+  34 891.24
+  35 1625.31
+  
+}\mytable
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[xmode=normal,ymode=log,
+        scaled y ticks = true,
+        grid=both,
+        %% minor y tick num=5,
+        ylabel={Elapsed Time (in hours)},
+        xlabel={Number of Constraints},
+        width=1*\textwidth,
+        height=9cm,
+        symbolic x coords={3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35}, % x labels for ticks
+        xtick=data,
+        ymin=0
+      ]
+
+      \addplot [fill=red,ybar,bar width=3.5pt] table[header=false] {\mytable};
+      \addplot [ultra thick,orange,line join=round,smooth] table[header=false] {\mytable};
+
+    \end{axis}
+  \end{tikzpicture}
+  \caption{The Elapsed Time vs. The Number of Constraints for the Halving Method}
+\end{figure}
+
+
 \end{document}
