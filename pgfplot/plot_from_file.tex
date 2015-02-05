@@ -5,16 +5,16 @@
 \begin{document}
 \begin{tikzpicture} % plotting with data in columns
   \begin{axis}
-    \addplot table [x=a, y=b, col sep=comma] {data.csv}; % addplot table reads table from file
-    \addplot table [x=a, y=c, col sep=comma] {data.csv};
-    \addplot table [x=a, y=d, col sep=comma] {data.csv};
+    \addplot table [x=a, y=b, col sep=comma] {../data/data.csv}; % addplot table reads table from file
+    \addplot table [x=a, y=c, col sep=comma] {../data/data.csv};
+    \addplot table [x=a, y=d, col sep=comma] {../data/data.csv};
   \end{axis}
 \end{tikzpicture}
 
 \begin{tikzpicture}
   \begin{axis}[ybar,bar width=2pt]
-    \addplot table[x=rounds, y=RRS] {table.dat};
-    \addplot table[x=rounds, y=QRC] {table.dat};
+    \addplot table[x=rounds, y=RRS] {../data/table.dat};
+    \addplot table[x=rounds, y=QRC] {../data/table.dat};
   \end{axis}
 \end{tikzpicture}
 
@@ -35,7 +35,7 @@
       (9217, 3.26101452e-06)
     };
     \addplot[color=blue,mark=*]
-    table[x=Cost,y=Error] {costerror.dat};
+    table[x=Cost,y=Error] {../data/costerror.dat};
 
     \legend{Case 1,Case 2}
   \end{loglogaxis}
