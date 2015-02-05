@@ -1,7 +1,9 @@
 \documentclass{article}
 \usepackage{pgfplots}
+\usepackage{filecontents}
+\usepackage{verbatim}
 \pgfplotsset{compat=1.8}
-
+\usepackage{pgfplotstable}
 
 \begin{document}
 \begin{tikzpicture}
@@ -64,4 +66,117 @@
 
   \end{axis}
 \end{tikzpicture}
+
+
+\begin{comment}
+  :Title: Convergence Plot
+  :Tags: PGFPlotstable;Mathematics;Manual
+  :Author: Christian Feuersänger
+  :Slug: convergence-plot
+
+  We assume that we did some scientfic experiment.
+  The scientific experiment yielded three
+  input data tables: one table for each involved parameter
+  d = 2, d = 3, d = 4. The data tables contain ``degrees
+  of freedom'' and some accuracy measurement ``l2_err''. In addition,
+  they might contain some meta-data
+  (in our case a column ``level'').
+
+  What we want is to produce three plots, each dof versus l2_err,
+  in a loglog plot. We expect that
+  the result is a line in a loglog plot, and we are interested in
+  its slope log e(N) = -a log(N) because that
+  characterizes our experiment.
+
+  The code is from the PGFPlots 1.10 manual:
+  ``3.3 Solving a Real Use Case: Scientific Data Analysis''.
+\end{comment}
+\begin{tikzpicture}
+  \begin{loglogaxis}[
+      title=Convergence Plot,
+      xlabel={Degrees of freedom},
+      ylabel={$L_2$ Error},
+      grid=major,
+      legend entries={$d=2$,$d=3$,$d=4$},
+    ]
+    \addplot table {../data/data_d2.dat};
+    \addplot table {../data/data_d3.dat};
+    \addplot table {../data/data_d4.dat};
+    \addplot table[
+      x=dof,
+      y={create col/linear regression={y=l2_err,
+            variance list={1000,800,600,500,400,200,100}}}
+    ]
+             {../data/data_d4.dat}
+             % save two points on the regression line
+             % for drawing the slope triangle
+             coordinate [pos=0.25] (A)
+             coordinate [pos=0.4]  (B)
+             ;
+             % save the slope parameter:
+             \xdef\slope{\pgfplotstableregressiona}
+
+             % draw the opposite and adjacent sides
+             % of the triangle
+             \draw (A) -| (B)
+             node [pos=0.75,anchor=west]
+             {\pgfmathprintnumber{\slope}};
+  \end{loglogaxis}
+  \begin{loglogaxis}[
+      footnotesize,
+      clip=false,
+      xshift=7cm,
+    ]
+    \addplot table {../data/data_d2.dat}
+    node [pos=1,pin=0:Special.] {}
+    ;
+  \end{loglogaxis}
+\end{tikzpicture}
+
+\newcommand{\scalefactor}{1}
+\begin{figure}[t]
+  \centering
+  \begin{tikzpicture}[scale=\scalefactor, thick]
+    % \draw[step=0.5cm, gray!50] (-4, -3) grid (4,3);
+
+    \node (A) at (-2.2,-1.8){{\bf A}};
+    \node (B) at (2.8,-1.8){{\bf B} = $y_{\bf p}$};
+
+    \node[circle,draw,scale=0.3] (realA) at (2,-1.5) {};
+    \node[circle,draw,scale=0.3] (realB) at (-2,-1.5) {};
+
+    \path[draw,very thick] (-2,-1.5) -- (2,-1.5);
+
+    \path[draw, red] (-2, -1) -- (2,2.5);
+    \node (cp) at (1, 1.9){${\bf c_p}$};
+
+    \path[draw,blue] (-2, 0) -- (2,1.5);
+    \node (cq) at (1,0.8){${\bf c_q}$};
+
+
+    \path[draw, dotted] (-3,2.5) -- (2,2.5);
+    \path[draw, dotted] (-3,-1) -- (-2,-1);
+    \path[ <->] (-3,-1) edge node[left]{$\delta$} (-3,2.5);
+
+    \path[draw, dotted] (-2.5,0) -- (-2,0);
+    \path[ <->] (-2.5,0) edge node[right]{$\Delta$} (-2.5,-1);
+
+    \path[draw, dotted] (-2.5,1.5) -- (2,1.5);
+    \path[<->] (-2.5,1.5) edge node[right, align=center]{\small decrease in \\ \small value of ${\bf y_p}$}(-2.5,2.5);
+
+    \path[->, dashed, sloped] (-3.5,-3) edge node[above]{\small increasing objective}  (-3.5,3);
+
+    \node (maxC) at (2.8,2.5) {${\bf c_{\bf p}}^T{y_{\bf p}}$};
+
+    \node at (0,-2.5){\small Two assignments};
+    \path[draw,->, dotted] (1.1,-2.4) -- (B);
+    \path[draw,->, dotted] (-1.1,-2.35) -- (A);
+
+  \end{tikzpicture}
+  \caption{{\footnotesize An illustration of the margin-based
+      amortization scheme showing the very simple case with only two
+      competing assignments {\bf A} and {\bf B}.}}
+  \label{fig:theorem-figure}
+
+  \end{figure}
 \end{document}
