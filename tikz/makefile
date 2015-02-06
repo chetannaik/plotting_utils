@@ -1,5 +1,5 @@
 .SUFFIXES: .tex .in .dvi .ps .pdf
-all: example.pdf
+all: example.pdf tree.pdf
 .tex.pdf: 
 	pdflatex $<
 clean:
