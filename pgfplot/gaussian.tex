@@ -7,7 +7,8 @@
 }
 
 \begin{tikzpicture}
-  \begin{axis}[every axis plot post/.append style={
+  \begin{axis}[
+      every axis plot post/.append style={
         mark=none,domain=-2:3,samples=50,smooth
       }, % All plots: from -2:2, 50 samples, smooth, no marks
       axis x line*=bottom, % no box around the plot, only x and y axis
