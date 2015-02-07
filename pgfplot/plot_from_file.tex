@@ -4,10 +4,16 @@
 
 \begin{document}
 \begin{tikzpicture} % plotting with data in columns
-  \begin{axis}
+  \begin{axis}[
+      xlabel=Here is x,
+      ylabel=Here is y,
+      legend style={at={(0.5,-0.18)},
+        anchor=north,legend columns=-1},
+    ]
     \addplot table [x=a, y=b, col sep=comma] {../data/data.csv}; % addplot table reads table from file
     \addplot table [x=a, y=c, col sep=comma] {../data/data.csv};
     \addplot table [x=a, y=d, col sep=comma] {../data/data.csv};
+    \legend{first,second,third}
   \end{axis}
 \end{tikzpicture}
 
@@ -36,7 +42,6 @@
     };
     \addplot[color=blue,mark=*]
     table[x=Cost,y=Error] {../data/costerror.dat};
-
     \legend{Case 1,Case 2}
   \end{loglogaxis}
   \end{tikzpicture}
