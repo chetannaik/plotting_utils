@@ -26,7 +26,8 @@
 \end{tikzpicture}
 
 \begin{tikzpicture}
-  \begin{axis}[x tick label style={
+  \begin{axis}[
+      x tick label style={
         /pgf/number format/1000 sep=
       },
       ylabel=Population,
@@ -34,7 +35,7 @@
       legend style={at={(0.5,-0.15)},
         anchor=north,legend columns=-1},
       ybar,
-      bar width=7pt,
+      bar width=7pt
     ]
     \addplot
     coordinates {(1930,50e6) (1940,33e6)
@@ -57,7 +58,6 @@
 \end{tikzpicture}
 
 % Define bar chart colors
-%
 \definecolor{bblue}{HTML}{4F81BD}
 \definecolor{rred}{HTML}{C0504D}
 \definecolor{ggreen}{HTML}{9BBB59}
