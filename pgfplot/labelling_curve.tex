@@ -2,6 +2,10 @@
 \usepackage{pgfplots}
 \begin{document}
 \begin{tikzpicture}
+  \tikzset{
+    every pin/.style={fill=yellow!50!white,rectangle,rounded corners=3pt,font=\tiny},
+    small dot/.style={fill=black,circle,scale=0.3}
+  }
   \begin{axis}
     \addplot {x^2} node [pos=0.75,pin={-60:$x^2$},inner sep=0pt] {}; % angle:label, where angle is angle of the pin in degrees
     \addplot {1.5*x^2} node [pos=0.75,pin={180:$1.5x^2$}] {};
