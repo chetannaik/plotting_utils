@@ -12,6 +12,7 @@
 % Nice captions.
 \usepackage[hang,small,bf]{caption}
 \setlength{\captionmargin}{25pt}
+%% \usepackage{caption}
 
 % New commands to keep things tidy.
 \newcommand{\ket}[1]{$\left|#1\right\rangle$}
@@ -29,8 +30,8 @@
           scale=0.5,
           level/.style={thick},
           virtual/.style={thick,densely dashed},
-          trans/.style={thick,<->,shorten >=2pt,shorten <=2pt,>=stealth},
-          classical/.style={thin,double,<->,shorten >=4pt,shorten <=4pt,>=stealth}
+          trans/.style={thick,<->,shorten >=2pt,shorten <=2pt,>=stealth}, % stealth make better looking arrows
+          classical/.style={thin,double,<->,shorten >=4pt,shorten <=4pt,>=stealth} % shorten the length of the arrow at specified end
         ]
         % Draw the energy levels.
         \draw[level] (2cm,-2em) -- (0cm,-2em) node[left] {\ket{a}};
@@ -44,8 +45,8 @@
         \draw[trans] (1cm,-2em) -- (2.5cm,8em) node[midway,left] {\Om{1}};
         \draw[trans] (3.5cm,8em) -- (5cm,-8em) node[midway,right] {\Om{2}};
         \draw[classical] (4.5cm,-8em) -- (1.5cm,-5em) node[midway,below] {\Ga{}};
-        \path[draw,<->] (-1,-1) -- (1,1) node[midway,above] {Hi};
-        \path[draw,<->,thick] (-2,-2) edge node[midway]{label} (4,4);
+        %% \path[draw,<->] (-1,-1) -- (1,1) node[midway,above] {Hi};
+        %% \path[draw,<->,thick] (-2,-2) edge node[midway]{label} (4,4);
       \end{tikzpicture}
     }
   }
