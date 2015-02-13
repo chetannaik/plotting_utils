@@ -28,7 +28,7 @@
       grid=major,
     ]
     \addplot {-x^5 - 242};
-    \addlegendentry{model}      % keeping track of legends is easier
+    \addlegendentry{model}      % keeping track of legends is easier this way!
     \addplot coordinates {
       (-4.77778,2027.60977)
       (-3.55556,347.84069)
@@ -188,6 +188,20 @@
     node [pos=1,pin=0:Special.] {}
     ;
   \end{loglogaxis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+  \begin{axis}[
+      height=0.5\textwidth,
+      width=\textwidth,
+      xlabel=LabelX,
+      xtick={1,...,10},
+      ylabel=LabelY,
+      ymode=log,
+      log basis y={2}
+    ]
+    \addplot[mark=*,blue] coordinates {(2,2) (5,8) (7,16)};
+  \end{axis}
 \end{tikzpicture}
 
 \end{document}
