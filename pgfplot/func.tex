@@ -1,0 +1,24 @@
+\documentclass[tikz]{standalone}
+\usepackage{pgfplots}
+%\pgfplotsset{compat=1.8}
+\begin{document}
+\begin{tikzpicture}[
+    declare function={
+      func(\x)= 10* log2(\x + 1);
+      g(\x)= 20* log2(\x + 1);
+      h(\x)= 1 / (\x + 1)^10;
+      h1(\x)= 1 / (\x + 1)^2;
+    }
+  ]
+  \begin{axis}[
+      %% axis x line=middle, axis y line=middle,
+      %% ymin=-6.5, ymax=5, ytick={-5,...,5}, ylabel=$y$,
+      %% xmin=-5, xmax=5, xtick={-5,...,5}, xlabel=$x$,
+    ]
+    %% \addplot[blue, domain=-100:100, smooth]{func(x)} node [pos=0.75,pin={-10:$x^2$},inner sep=0pt] {};
+    %% \addplot[red, domain=-100:100, smooth]{g(x)} node [pos=0.75,pin={-10:$x^2$},inner sep=0pt] {};
+    \addplot[red, domain=-10:10, smooth]{h(x)} node [pos=0.75,pin={-10:$x^2$},inner sep=0pt] {};
+    \addplot[red, domain=-10:10, smooth]{h1(x)} node [pos=0.75,pin={-10:$x^2$},inner sep=0pt] {};
+  \end{axis}
+\end{tikzpicture}
+\end{document}
