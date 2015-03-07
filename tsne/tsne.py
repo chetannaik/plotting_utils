@@ -164,15 +164,16 @@ def tsne(X = Math.array([]), no_dims = 2, initial_dims = 50, perplexity = 30.0):
 		
 	
 if __name__ == "__main__":
-	print "Run Y = tsne.tsne(X, no_dims, perplexity) to perform t-SNE on your dataset."
-	print "Running example on 2,500 MNIST digits..."
-	X = Math.loadtxt("mnist2500_X.txt");
-	labels = Math.loadtxt("mnist2500_labels.txt");
+	# print "Run Y = tsne.tsne(X, no_dims, perplexity) to perform t-SNE on your dataset."
+	# print "Running example on 2,500 MNIST digits..."
+	X = Math.loadtxt("vectors.txt");
         # print labels
-        txt_labels=['point{0}'.format(i) for i in range(len(labels))]
-                    
+        # txt_labels=['point{0}'.format(i) for i in range(len(labels))]
+        txt_labels=Math.loadtxt("labels.txt",dtype=str);
+	labels = range(len(txt_labels))
 	Y = tsne(X, 2, 50, 20.0);
-	Plot.scatter(Y[:,0], Y[:,1], 20, labels);
-        for label, x, y in zip(txt_labels, Y[:, 0], Y[:, 1]):
-                Plot.annotate(label,xy = (x, y), xytext = (-20, 20),textcoords = 'offset points', ha = 'right', va = 'bottom',bbox = dict(boxstyle = 'round,pad=0.5', fc = 'yellow', alpha = 0.5),arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
-        Plot.savefig('foo.png')
+        Math.savetxt('2dplot.txt',Y)
+	# Plot.scatter(Y[:,0], Y[:,1], 20, labels);
+        # for label, x, y in zip(txt_labels, Y[:, 0], Y[:, 1]):
+        #         Plot.annotate(label,xy = (x, y), xytext = (-20, 20),textcoords = 'offset points', ha = 'right', va = 'bottom',bbox = dict(boxstyle = 'round,pad=0.5', fc = 'yellow', alpha = 0.5),arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+        # Plot.savefig('foo.png')
