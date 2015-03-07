@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{pgfplots,filecontents}
+\pgfplotsset{compat=1.7}
+\usepackage{pgfplotstable}
+\begin{filecontents*}{table.csv}
+  Name,X,Y,Z
+  ODIN,250,45,2001
+  NIDO,280,70,2002
+  DINO,270,60,2003
+\end{filecontents*}
+%% \begin{filecontents*}{mydata.dat}
+%%   nodes     x         y       label
+%%   shyam    14.1209   7.0332  a
+%%   2.0000     0.6367   16.6166 a
+%%   3.0000     5.5385   11.7053 a
+%%   4.0000     0.9234   10.9945 a
+%%   5.0000     1.9426   18.3439 b
+%%   6.0000    16.4692    5.7168 b
+%%   7.0000    13.8966   15.1440 a
+%%   8.0000     6.3420   15.0746 a
+%%   9.0000    19.0044    7.6089 b
+%%   10.0000    0.6889   11.3564 b
+%% \end{filecontents*}
+%% \begin{figure}
+%%   \centering
+%%   \begin{tikzpicture}
+%%     \begin{axis}[xlabel=metri,ylabel=metri]
+%%       \addplot[
+%%         visualization depends on={\thisrow{nodes}\as\myvalue},
+%%         scatter/classes={
+%%           a={mark=*,blue},
+%%           b={mark=*,red}
+%%         },
+%%         scatter, only marks,
+%%         scatter src=explicit symbolic,
+%%         nodes near coords*={\myvalue},
+%%       ] table[x=x,y=y,meta=label] {mydata.dat};
+%%     \end{axis}
+%%   \end{tikzpicture}
+%% \end{figure}
+
+
+
+\begin{document}
+%% \pgfkeys{/pgf/number format/set thousands separator={}}
+%% \pgfplotstabletypeset[columns/Name/.style={string type},col sep=comma]{table.csv}
+\begin{tikzpicture}
+  \begin{axis}[
+      visualization depends on={value \thisrow{Name} \as \labela}, % note the value prefix
+      visualization depends on={\thisrow{Z} \as \labelb},
+      every node near coord/.append style={font={\tiny}},
+      nodes near coords={\labela/\pgfmathprintnumber\labelb},
+      nodes near coords align={horizontal}
+    ]
+    \addplot[scatter,only marks] table [x=X,y=Y,col sep=comma] {table.csv};
+  \end{axis}
+\end{tikzpicture}
+
+
+\end{document}
