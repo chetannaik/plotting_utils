@@ -12,7 +12,7 @@
 
 import numpy as Math
 import pylab as Plot
-	
+import sys	
 def Hbeta(D = Math.array([]), beta = 1.0):
 	"""Compute the perplexity and the P-row for a specific value of the precision of a Gaussian distribution."""
 	
@@ -173,7 +173,7 @@ if __name__ == "__main__":
 	labels = range(len(txt_labels))
 	Y = tsne(X, 2, 50, 20.0);
         Math.savetxt('2dplot.txt',Y)
-	# Plot.scatter(Y[:,0], Y[:,1], 20, labels);
-        # for label, x, y in zip(txt_labels, Y[:, 0], Y[:, 1]):
-        #         Plot.annotate(label,xy = (x, y), xytext = (-20, 20),textcoords = 'offset points', ha = 'right', va = 'bottom',bbox = dict(boxstyle = 'round,pad=0.5', fc = 'yellow', alpha = 0.5),arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
-        # Plot.savefig('foo.png')
+	Plot.scatter(Y[:,0], Y[:,1], 20, labels);
+        for label, x, y in zip(txt_labels, Y[:, 0], Y[:, 1]):
+                Plot.annotate(label,xy = (x, y), xytext = (-20, 20),textcoords = 'offset points', ha = 'right', va = 'bottom',bbox = dict(boxstyle = 'round,pad=0.5', fc = 'yellow', alpha = 0.5),arrowprops = dict(arrowstyle = '->', connectionstyle = 'arc3,rad=0'))
+        Plot.savefig(sys.argv[1])
