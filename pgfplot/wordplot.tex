@@ -2,11 +2,16 @@
 \usepackage{pgfplots,filecontents}
 \pgfplotsset{compat=1.7}
 \usepackage{pgfplotstable}
-\begin{filecontents*}{table.csv}
-  Name,X,Y,Z
-  ODIN,250,45,2001
-  NIDO,280,70,2002
-  DINO,270,60,2003
+\begin{filecontents*}{some.dat}
+  Name X Y  
+  china 1.101626758821785756e+01 1.201068366186576526e+02
+  russia -1.344359055905537161e+02 -7.025085716650841050e+01
+  moscow -1.098769373452842046e+01 -1.201091141483220355e+02
+  iraq 1.194563139845701301e+02 -9.345387907771353753e+01
+  afghanistan 1.344467861120577368e+02 7.019531689026740651e+01
+  beijing -5.114432878968831631e+01 4.685637466345991875e+00
+  baghdad 5.108577018445052431e+01 -4.679750251388877125e+00
+  kabul -1.194372097545258242e+02 9.350580966866178301e+01
 \end{filecontents*}
 %% \begin{filecontents*}{mydata.dat}
 %%   nodes     x         y       label
@@ -47,12 +52,12 @@
 \begin{tikzpicture}
   \begin{axis}[
       visualization depends on={value \thisrow{Name} \as \labela}, % note the value prefix
-      visualization depends on={\thisrow{Z} \as \labelb},
+      %% visualization depends on={\thisrow{Z} \as \labelb},
       every node near coord/.append style={font={\tiny}},
-      nodes near coords={\labela/\pgfmathprintnumber\labelb},
+      nodes near coords={\labela},
       nodes near coords align={horizontal}
     ]
-    \addplot[scatter,only marks] table [x=X,y=Y,col sep=comma] {table.csv};
+    \addplot[scatter,only marks] table [x=X,y=Y] {some.dat};
   \end{axis}
 \end{tikzpicture}
 
