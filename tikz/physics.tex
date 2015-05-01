@@ -3,6 +3,7 @@
 \usepackage{filecontents}
 \usepackage{tikz}
 \usepackage{verbatim}
+\usepackage{comment}
 \pgfplotsset{compat=1.8}
 \usepackage{pgfplotstable}
 % I only need the arrows for this one.
@@ -53,4 +54,26 @@
   \caption{A level diagram with some transitions drawn in TikZ, resized,
     and placed in a figure environment.}
 \end{figure}
+
+% BEGIN RECEIVE ORGTBL salesfigures
+\begin{tabular}{lrrr}
+Month & Days & Nr sold & per day \\
+\hline
+Jan & 23 & 55 & 2.4 \\
+Feb & 21 & 16 & 0.8 \\
+March & 22 & 278 & 12.6 \\
+\end{tabular}
+% END RECEIVE ORGTBL salesfigures
+Hi, this is a table
+\begin{comment}
+#+ORGTBL: SEND salesfigures orgtbl-to-latex
+| Month | Days | Nr sold | per day |
+|-------+------+---------+---------|
+| Jan   |   23 |      55 |     2.4 |
+| Feb   |   21 |      16 |     0.8 |
+| March |   22 |     278 |    12.6 |
+#+TBLFM: $4=$3/$2;%.1f
+% $ (optional extra dollar to keep font-lock happy, see footnote)
+\end{comment}
+that should compile.
 \end{document}

@@ -1,0 +1,31 @@
+\documentclass{article}
+\usepackage{pgfplots}
+\usepackage[left=2.5cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\pgfplotsset{compat=1.8}
+\usetikzlibrary{patterns}
+
+\begin{document}
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}
+    \begin{axis}[xmode=normal,ymode=log,
+        scaled y ticks = true,
+        grid=both,
+        %% minor y tick num=5,
+        ylabel={Elapsed Time (in hours)},
+        xlabel={Number of Constraints},
+        width=1*\textwidth,
+        height=9cm,
+        %% symbolic x coords={3,4,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35}, % x labels for ticks
+        xtick=data,
+        ymin=0
+      ]
+
+      \addplot [fill=red,ybar,bar width=3.5pt] table[header=false] {news.data};
+      %% \addplot [ultra thick,orange,line join=round,smooth] table[header=false] {\mytable};
+
+    \end{axis}
+  \end{tikzpicture}
+  \caption{The Elapsed Time vs. The Number of Constraints for the Halving Method}
+\end{figure}
+\end{document}
