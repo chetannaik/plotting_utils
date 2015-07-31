@@ -80,19 +80,25 @@
 %%   3,30,50,70
 %% }
 
+%% \pgfplotstabletypeset[
+%%   color cells={min=-300,max=800},
+%%   col sep=comma,
+%%   /pgfplots/colormap={whiteblue}{rgb255(0cm)=(255,255,255);
+%%     rgb255(1cm)=(0,0,188)},     % increases brightness
+%% ]{
+%%   a,b,c,d
+%%   50,-300,-200,-100
+%%   -20,0,100,200
+%%   5,300,40,800
+%%   3,30,50,70
+%% }
+
 \pgfplotstabletypeset[
   color cells={min=-300,max=800},
   col sep=comma,
   /pgfplots/colormap={whiteblue}{rgb255(0cm)=(255,255,255);
     rgb255(1cm)=(0,0,188)},     % increases brightness
-]{
-  a,b,c,d
-  50,-300,-200,-100
-  -20,0,100,200
-  5,300,40,800
-  3,30,50,70
-}
-
+]{data1.csv}
 %% \pgfplotstabletypeset[
 %%   color cells={min=0,max=0.8,textcolor=-mapped color!80!black},
 %%   /pgfplots/colormap/greenyellow,
