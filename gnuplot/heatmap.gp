@@ -4,8 +4,8 @@ set output "heatmap.png"
 
 # set title "Heat Map generated from a file containing Z values only"
 
-# set xrange [-5:70]
-# set yrange [-5:210]
+set xrange [-5:70]
+set yrange [-5:410]
 
 set xlabel "paragraph pos in doc"
 set ylabel "doc id"
@@ -13,7 +13,8 @@ set ylabel "doc id"
 set palette rgbformula 2,-7,-7
 # plot 'log.dat' matrix with image
 # plot 'for_heatmap2.txt' matrix with image
-plot 'for_heatmap3.txt' matrix with image title "paragraph similarity per doc"
+# plot 'for_heatmap3.txt' matrix with image title "paragraph similarity per doc"
+plot 'tmp' matrix with image title "paragraph similarity per doc"
 
 set output
 set terminal pop
